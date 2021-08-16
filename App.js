@@ -2,10 +2,22 @@ import React from 'react';
 import Homescreen from './app/screens/homescreen';
 
 
-export default function App() {
+
+
+const App = () => {
   return (
+
     <Homescreen />
+    // <NavigationContainer>
+    //   <Tabs></Tabs>
+    // </NavigationContainer>
   );
 }
+
+
+
+export default App;
+
+
 
 
