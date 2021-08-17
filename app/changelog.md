@@ -12,3 +12,8 @@
 > Chnagelog: v-0.1.3
 
 - Bottom tab bar added for nevigation.
+
+> Chnagelog: v-0.1.4
+
+- Expense form added.
+- Did some styling .

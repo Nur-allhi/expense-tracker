@@ -1,15 +1,11 @@
 import React from 'react';
-// import { StyleSheet, Text, View } from 'react-native';
 import { Image, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 function Homescreen(props) {
     return (
         <View style={styles.container}>
-            {/* <Text>
-                Home
-            </Text> */}
             <StatusBar
-                backgroundColor="#FDFAF6"
+                backgroundColor="#fff"
                 barStyle="dark-content"
             />
             <View style={styles.userSectionWrapper}>
@@ -29,10 +25,7 @@ function Homescreen(props) {
                 </TouchableOpacity>
             </View>
 
-            {/* <TouchableOpacity style={styles.addInputWrapper}>
-                <View style={styles.addMoney}></View>
-                <View style={styles.addExpense}></View>
-            </TouchableOpacity> */}
+
 
         </View>
     );
@@ -43,7 +36,7 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingTop: 10,
         paddingHorizontal: 10,
-        // backgroundColor: "#595260",
+        backgroundColor: "#fff",
     },
     userSectionWrapper: {
         paddingHorizontal: 10,
@@ -97,36 +90,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: "bold"
     },
-    addInputWrapper: {
-        paddingVertical: 15,
-        position: 'absolute',
-        bottom: 30,
-        right: 15,
-        borderRadius: 20,
-        // shadowColor: "#000",
-        // shadowOffset: {
-        //     width: 0,
-        //     height: 8,
-        // },
-        // shadowOpacity: 0.44,
-        // shadowRadius: 10.32,
 
-        // elevation: 16,
-        backgroundColor: "#FDF6F0"
-    },
-    addMoney: {
-        height: 50,
-        width: 50,
-        borderRadius: 20,
-        backgroundColor: "#055052",
-        marginBottom: 10,
-    },
-    addExpense: {
-        height: 50,
-        width: 50,
-        borderRadius: 20,
-        backgroundColor: "#B61919",
-    },
 })
 
 export default Homescreen;

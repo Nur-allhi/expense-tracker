@@ -5,7 +5,7 @@ export const AddMoney = () => {
     return (
         <View>
             <Text>
-                Add here income and expenses
+               New balance will add here
             </Text>
         </View>
     )
