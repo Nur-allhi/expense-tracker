@@ -5,8 +5,9 @@ function Homescreen(props) {
     return (
         <View style={styles.container}>
             <StatusBar
-                backgroundColor="#fff"
                 barStyle="dark-content"
+                backgroundColor="#fff"
+                translucent={true}
             />
             <View style={styles.userSectionWrapper}>
                 <Image style={styles.userImage} source={require('../assets/external/user.png')} />
@@ -34,8 +35,9 @@ function Homescreen(props) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 10,
-        paddingHorizontal: 10,
+        // paddingTop: 10,
+        marginTop: StatusBar.currentHeight,
+        paddingHorizontal: 20,
         backgroundColor: "#fff",
     },
     userSectionWrapper: {

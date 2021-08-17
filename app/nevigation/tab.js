@@ -1,9 +1,10 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
+import AddEpenses from '../screens/addEpenses';
+import AddMoney from '../screens/addMoney';
 import Homescreen from '../screens/homescreen';
-import AddEpenses from './../screens/addEpenses';
-import { AddMoney } from './../screens/addTransaction';
+
 
 
 const Tab = createBottomTabNavigator();
@@ -13,6 +14,7 @@ const Tabs = () => {
         <Tab.Navigator
             tabBarOptions={{
                 showLabel: false,
+                keyboardHidesTabBar: true,
                 style: {
                     position: "absolute",
                     bottom: 10,

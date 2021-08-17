@@ -17,3 +17,7 @@
 
 - Expense form added.
 - Did some styling .
+
+> Chnagelog: v-0.1.5
+
+- Add money form added.

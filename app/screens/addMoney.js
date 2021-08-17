@@ -1,24 +1,23 @@
 import React from 'react';
 import { Controller, useForm } from "react-hook-form";
-import { Image, Pressable, StatusBar, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Image, StatusBar, StyleSheet, Text, TextInput, View } from 'react-native';
 
-const AddEpenses = () => {
+
+
+const AddMoney = () => {
     const { control, handleSubmit } = useForm();
     const onSubmit = data => console.log(data);
     return (
-        <View style={styles.conatiner}>
+        <View style={styles.container}>
             <StatusBar
                 barStyle="dark-content"
                 backgroundColor="#fff"
                 translucent={true}
             />
-            <Text style={styles.pageTitle}>
-                New Expense
+            <Text style={styles.screenTitle}>
+                Add money
             </Text>
-
-            <View style={styles.expenseForm}>
-
-                {/* Amount */}
+            <View style={styles.addMoneyForm}>
                 <Controller
                     control={control}
                     rules={{
@@ -38,85 +37,63 @@ const AddEpenses = () => {
                             />
                         </View>
                     )}
-                    name="Amount"
+                    name="amount"
                     defaultValue=""
                 />
-                {/* Catagory */}
                 <Controller
                     control={control}
                     rules={{
-                        maxLength: 100,
+                        required: true,
                     }}
                     render={({ field: { onChange, onBlur, value } }) => (
-                        <View style={styles.catagoryWrapper}>
+                        <View style={styles.titleWrapper}>
                             <Image style={{
                                 width: 40,
                                 height: 40,
-                            }} source={require('../assets/formIcon/catagory.png')} />
-                            <TextInput style={styles.catagoryField}
-                                placeholder="Catagory"
+                            }} source={require('../assets/formIcon/money.png')} />
+                            <TextInput style={styles.titleField}
+                                placeholder="Where you get those?"
                                 onBlur={onBlur}
                                 onChangeText={onChange}
                                 value={value}
                             />
                         </View>
                     )}
-                    name="catagory"
-                    defaultValue=""
-                />
-                {/* Notes */}
-                <Controller
-                    control={control}
-                    rules={{
-                        maxLength: 100,
-                    }}
-                    render={({ field: { onChange, onBlur, value } }) => (
-                        <View style={styles.noteWrapper}>
-                            <Image style={{
-                                width: 40,
-                                height: 40,
-                            }} source={require('../assets/formIcon/note.png')} />
-                            <TextInput style={styles.noteField}
-                                placeholder="Notes"
-                                onBlur={onBlur}
-                                onChangeText={onChange}
-                                value={value}
-                            />
-                        </View>
-                    )}
-                    name="note"
+                    name="title"
                     defaultValue=""
                 />
                 <Pressable style={styles.submitButton} onPress={handleSubmit(onSubmit)}>
                     <Text style={styles.buttonText}>Add To Expense</Text>
                 </Pressable>
-                {/* </ScrollView> */}
             </View>
-        </View >
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
-    conatiner: {
+    container: {
         flex: 1,
         marginTop: StatusBar.currentHeight,
-        // top: 20,
-        backgroundColor: "#fff",
+        backgroundColor: "#FFE6E6",
     },
-    pageTitle: {
+    screenTitle: {
         marginTop: 10,
         textAlign: "center",
         fontSize: 20,
         fontWeight: "bold",
     },
-    expenseForm: {
+    addMoneyForm: {
         paddingHorizontal: 30,
         top: 30,
     },
     amountWrapper: {
-        height: 70,
+        height: 100,
+        padding: 10,
         flexDirection: "row",
         alignItems: "center",
+        // borderWidth: 2,
+        backgroundColor: "#F1E9E5",
+        borderRadius: 10,
     },
     amountField: {
         width: "80%",
@@ -124,50 +101,27 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderColor: "black",
         paddingLeft: 20,
+        fontSize: 30,
     },
-    catagoryWrapper: {
+    titleWrapper: {
         height: 70,
         marginTop: 50,
         flexDirection: "row",
         alignItems: "center",
+        borderWidth: 2,
+
     },
-    catagoryField: {
+    titleField: {
         width: "80%",
         height: "90%",
         borderBottomWidth: 1,
         borderColor: "black",
         paddingLeft: 20,
     },
-    noteWrapper: {
-        height: 70,
-        marginTop: 50,
-        marginBottom: 40,
-        flexDirection: "row",
-        alignItems: "center",
-    },
-    noteField: {
-        width: "80%",
-        height: "90%",
-        borderBottomWidth: 1,
-        borderColor: "black",
-        paddingLeft: 20,
-    },
-    submitButton: {
-        height: 50,
-        alignItems: "center",
-        justifyContent: "center",
-        paddingHorizontal: 100,
-        borderRadius: 10,
-        backgroundColor: "#035397",
-    },
-
-    buttonText: {
-        color: "#fff",
-        fontSize: 16,
-    },
-
-
+    submitButton: {},
+    buttonText: {},
 })
 
 
-export default AddEpenses
+export default AddMoney
+
