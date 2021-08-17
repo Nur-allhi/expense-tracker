@@ -1,10 +1,9 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import Homescreen from '../screens/homescreen';
-import { AddTransaction } from './../screens/addTransaction';
-import { ExpenseGraph } from './../screens/expenseGraph';
-import { Transaction } from './../screens/transaction';
+import AddEpenses from './../screens/addEpenses';
+import { AddMoney } from './../screens/addTransaction';
 
 
 const Tab = createBottomTabNavigator();
@@ -12,30 +11,111 @@ const Tab = createBottomTabNavigator();
 const Tabs = () => {
     return (
         <Tab.Navigator
-            tabBarOption={{
+            tabBarOptions={{
                 showLabel: false,
                 style: {
                     position: "absolute",
-                    bottom: 25,
+                    bottom: 10,
                     left: 20,
                     right: 20,
                     elevation: 0,
-                    height: 70,
+                    height: 90,
                     borderRadius: 15,
                     ...styles.shadow
                 }
             }}
         >
-            {/* options={{
-                tabBarIcon: ({ focused }) => {
 
-                }
+            <Tab.Screen name="AddMoney" component={AddMoney} options={{
+                tabBarIcon: ({ focused }) => (
+                    <View style={{
+                        alignItems: "center",
+                        justifyContent: "center",
+                        // top: 10,
+                    }}>
+                        <Image source={require('../assets/icon/add.png')}
+                            resizeMode="contain"
+                            style={{
+                                width: 25,
+                                height: 25,
+                                tintColor: focused ? "#e32f45" : "#748c94"
+                            }}
+                        />
+                        <Text style={{
+                            color: focused ? "#e32f45" : "#748c94",
+                            fontSize: 12
+                        }}>Add Money</Text>
+                    </View>
+                ),
+            }} />
+            <Tab.Screen name="Home" component={Homescreen} options={{
+                tabBarIcon: ({ focused }) => (
+                    <View style={{
+                        alignItems: "center",
+                        justifyContent: "center",
+                        // top: 10,
+                    }}>
+                        <Image source={require('../assets/icon/home.png')}
+                            resizeMode="contain"
+                            style={{
+                                width: 25,
+                                height: 25,
+                                tintColor: focused ? "#e32f45" : "#748c94"
+                            }}
+                        />
+                        <Text style={{
+                            color: focused ? "#e32f45" : "#748c94",
+                            fontSize: 12
+                        }}>Home</Text>
+                    </View>
+                ),
+            }} />
+            <Tab.Screen name="AddExpenses" component={AddEpenses} options={{
+                tabBarIcon: ({ focused }) => (
+                    <View style={{
+                        alignItems: "center",
+                        justifyContent: "center",
+                        // top: 10,
+                    }}>
+                        <Image source={require('../assets/icon/expenses.png')}
+                            resizeMode="contain"
+                            style={{
+                                width: 25,
+                                height: 25,
+                                tintColor: focused ? "#e32f45" : "#748c94"
+                            }}
+                        />
+                        <Text style={{
+                            color: focused ? "#e32f45" : "#748c94",
+                            fontSize: 12
+                        }}>Add Expenses</Text>
+                    </View>
+                ),
+            }} />
+            {/* <Tab.Screen name="Log" component={Transaction} options={{
+                tabBarIcon: ({ focused }) => (
+                    <View style={{
+                        alignItems: "center",
+                        justifyContent: "center",
+                        // top: 10,
+                    }}>
+                        <Image source={require('../assets/icon/transaction.png')}
+                            resizeMode="contain"
+                            style={{
+                                width: 25,
+                                height: 25,
+                                tintColor: focused ? "#e32f45" : "#748c94"
+                            }}
+                        />
+                        <Text style={{
+                            color: focused ? "#e32f45" : "#748c94",
+                            fontSize: 12
+                        }}>Transaction</Text>
+                    </View>
+                ),
+            }} /> */}
 
-            }} */}
-            <Tab.Screen name="Home" component={Homescreen} />
-            <Tab.Screen name="Log" component={Transaction} />
-            <Tab.Screen name="Add" component={AddTransaction} />
-            <Tab.Screen name="Graph" component={ExpenseGraph} />
+
         </Tab.Navigator>
     )
 }

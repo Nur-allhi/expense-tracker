@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
-export const AddTransaction = () => {
+export const AddMoney = () => {
     return (
         <View>
             <Text>

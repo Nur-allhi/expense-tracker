@@ -1,16 +1,16 @@
+import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
-import Homescreen from './app/screens/homescreen';
+import Tabs from './app/nevigation/tab';
+
 
 
 
 
 const App = () => {
   return (
-
-    <Homescreen />
-    // <NavigationContainer>
-    //   <Tabs></Tabs>
-    // </NavigationContainer>
+    <NavigationContainer>
+      <Tabs />
+    </NavigationContainer>
   );
 }
 

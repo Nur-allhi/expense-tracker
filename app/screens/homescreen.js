@@ -29,10 +29,10 @@ function Homescreen(props) {
                 </TouchableOpacity>
             </View>
 
-            <TouchableOpacity style={styles.addInputWrapper}>
+            {/* <TouchableOpacity style={styles.addInputWrapper}>
                 <View style={styles.addMoney}></View>
                 <View style={styles.addExpense}></View>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
         </View>
     );

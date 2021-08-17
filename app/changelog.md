@@ -8,3 +8,7 @@
 > Chnagelog: v-0.1.2
 
 - money input section design added.
+
+> Chnagelog: v-0.1.3
+
+- Bottom tab bar added for nevigation.
