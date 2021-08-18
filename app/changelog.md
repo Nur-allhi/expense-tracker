@@ -25,3 +25,8 @@
 > Chnagelog: v-0.1.6
 
 - Form design done.
+
+> Chnagelog: v-0.1.7
+
+- balance input fixed.
+- Inputed balance can be store in a array.

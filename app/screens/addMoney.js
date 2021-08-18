@@ -1,26 +1,23 @@
 import React, { useState } from 'react';
-import { Controller, useForm } from "react-hook-form";
-import { Image, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Image, Keyboard, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 
 
 const AddMoney = () => {
-    const [balance, setBalance] = useState([])
+    const [formInput, setFormInput] = useState({})
+    const [newBalance, setNewbalance] = useState([])
 
-
-    const { control, handleSubmit } = useForm();
-    const onSubmit = (data) => {
-        // console.log(data)
-        const formData = data
-        console.log(formData.amount)
-        const newBalance = [...balance, formData]
+    const addBalance = () => {
+        const formData = {
+            title: formInput.title,
+            balance: parseFloat(formInput.balanceInput),
+        }
+        Keyboard.dismiss()
+        setNewbalance([...newBalance, formData])
+        setFormInput('')
         
-        // console.log(newBalance)
-        // setBalance(newBalance)
-    };
-    // console.log("🚀 ~balance", balance)
-
-
+    }
+    console.log(newBalance)
     return (
         <View style={styles.container}>
             <StatusBar
@@ -32,54 +29,33 @@ const AddMoney = () => {
                 Add money
             </Text>
             <View style={styles.addMoneyForm}>
-                <Controller
-                    control={control}
-                    rules={{
-                        required: true,
-                    }}
-                    render={({ field: { onChange, onBlur, value } }) => (
-                        <View style={styles.amountWrapper}>
-                            <Image style={{
-                                width: 40,
-                                height: 40,
-                            }} source={require('../assets/formIcon/salary.png')} />
-                            <TextInput
-                                returnKeyType={'next'}
-                                keyboardType={'phone-pad'}
-                                style={styles.amountField}
-                                placeholder="Amount"
-                                onBlur={onBlur}
-                                onChangeText={onChange}
-                                value={value}
-                            />
-                        </View>
-                    )}
-                    name="amount"
-                    defaultValue=""
-                />
-                <Controller
-                    control={control}
-                    rules={{
-                        required: true,
-                    }}
-                    render={({ field: { onChange, onBlur, value } }) => (
-                        <View style={styles.titleWrapper}>
-                            <Image style={{
-                                width: 40,
-                                height: 40,
-                            }} source={require('../assets/formIcon/tag.png')} />
-                            <TextInput style={styles.titleField}
-                                placeholder="Where you get those?"
-                                onBlur={onBlur}
-                                onChangeText={onChange}
-                                value={value}
-                            />
-                        </View>
-                    )}
-                    name="title"
-                    defaultValue=""
-                />
-                <TouchableOpacity style={styles.addMoneyButton} onPress={handleSubmit(onSubmit)}>
+
+                <View style={styles.amountWrapper}>
+                    <Image style={{
+                        width: 40,
+                        height: 40,
+                    }} source={require('../assets/formIcon/salary.png')} />
+                    <TextInput
+                        style={styles.amountField}
+                        keyboardType={'phone-pad'}
+                        placeholder="Balance"
+                        value={formInput.balanceInput}
+                        onChangeText={(number) => setFormInput({ ...formInput, balanceInput: number })}
+                    />
+                </View>
+                <View style={styles.titleWrapper}>
+                    <Image style={{
+                        width: 40,
+                        height: 40,
+                    }} source={require('../assets/formIcon/tag.png')} />
+                    <TextInput
+                        style={styles.titleField}
+                        placeholder="Where you get those?"
+                        value={formInput.title}
+                        onChangeText={(text) => setFormInput({ ...formInput, title: text })}
+                    />
+                </View>
+                <TouchableOpacity style={styles.addMoneyButton} onPress={addBalance}>
                     <Text style={styles.buttonText}>Add to Balance</Text>
                 </TouchableOpacity>
             </View>
