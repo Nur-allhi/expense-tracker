@@ -6,7 +6,7 @@ function Homescreen(props) {
         <View style={styles.container}>
             <StatusBar
                 barStyle="dark-content"
-                backgroundColor="#fff"
+                backgroundColor="#E1E5EA"
                 translucent={true}
             />
             <View style={styles.userSectionWrapper}>
@@ -35,10 +35,10 @@ function Homescreen(props) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // paddingTop: 10,
         marginTop: StatusBar.currentHeight,
         paddingHorizontal: 20,
-        backgroundColor: "#fff",
+        backgroundColor: "#E1E5EA",
+
     },
     userSectionWrapper: {
         paddingHorizontal: 10,
@@ -63,34 +63,39 @@ const styles = StyleSheet.create({
         width: "45%",
         height: 100,
         borderRadius: 15,
-        backgroundColor: "#B5EAEA",
+        backgroundColor: "#64C9CF",
         justifyContent: "center",
         alignItems: "center"
 
     },
     balnceTitile: {
         fontSize: 16,
+        color: "#fff",
     },
     balanceAmount: {
         fontSize: 20,
-        fontWeight: "bold"
+        fontWeight: "bold",
+        color: "#fff",
 
     },
     spendings: {
         width: "45%",
         height: 100,
         borderRadius: 15,
-        backgroundColor: "#FE9898",
+        backgroundColor: "#588C73",
         justifyContent: "center",
         alignItems: "center"
 
     },
     spendingTitle: {
         fontSize: 16,
+        color: "#fff",
+
     },
     spendingAmount: {
         fontSize: 20,
-        fontWeight: "bold"
+        fontWeight: "bold",
+        color: "#fff",
     },
 
 })

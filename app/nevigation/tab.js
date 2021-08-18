@@ -10,6 +10,7 @@ import Homescreen from '../screens/homescreen';
 const Tab = createBottomTabNavigator();
 
 const Tabs = () => {
+
     return (
         <Tab.Navigator
             tabBarOptions={{

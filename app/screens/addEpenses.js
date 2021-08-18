@@ -1,15 +1,18 @@
 import React from 'react';
 import { Controller, useForm } from "react-hook-form";
-import { Image, Pressable, StatusBar, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Image, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 const AddEpenses = () => {
     const { control, handleSubmit } = useForm();
-    const onSubmit = data => console.log(data);
+    const onSubmit = (data) => {
+        console.log(data)
+        
+    };
     return (
         <View style={styles.conatiner}>
             <StatusBar
                 barStyle="dark-content"
-                backgroundColor="#fff"
+                backgroundColor="#E1E5EA"
                 translucent={true}
             />
             <Text style={styles.pageTitle}>
@@ -24,15 +27,17 @@ const AddEpenses = () => {
                     rules={{
                         required: true,
                     }}
-                    render={({ field: { onChange, onBlur, value } }) => (
+                    render={({ field: { onChange, value } }) => (
                         <View style={styles.amountWrapper}>
                             <Image style={{
                                 width: 40,
                                 height: 40,
-                            }} source={require('../assets/formIcon/money.png')} />
-                            <TextInput style={styles.amountField}
+                            }} source={require('../assets/formIcon/expense.png')} />
+                            <TextInput
+                                keyboardType={'phone-pad'}
+                                style={styles.amountField}
                                 placeholder="Amount"
-                                onBlur={onBlur}
+                                // onBlur={onBlur}
                                 onChangeText={onChange}
                                 value={value}
                             />
@@ -87,10 +92,10 @@ const AddEpenses = () => {
                     name="note"
                     defaultValue=""
                 />
-                <Pressable style={styles.submitButton} onPress={handleSubmit(onSubmit)}>
+                <TouchableOpacity style={styles.submitButton} onPress={handleSubmit(onSubmit)}>
                     <Text style={styles.buttonText}>Add To Expense</Text>
-                </Pressable>
-                {/* </ScrollView> */}
+                </TouchableOpacity>
+
             </View>
         </View >
     )
@@ -100,8 +105,8 @@ const styles = StyleSheet.create({
     conatiner: {
         flex: 1,
         marginTop: StatusBar.currentHeight,
-        // top: 20,
-        backgroundColor: "#fff",
+        paddingHorizontal: 15,
+        backgroundColor: "#E1E5EA",
     },
     pageTitle: {
         marginTop: 10,
@@ -110,55 +115,63 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
     },
     expenseForm: {
-        paddingHorizontal: 30,
-        top: 30,
+        top: 20,
+        padding: 30,
+        borderRadius: 16,
+
     },
     amountWrapper: {
-        height: 70,
+        height: 90,
         flexDirection: "row",
         alignItems: "center",
+        padding:10,
+        borderRadius:10,
+        backgroundColor: "#fff"
     },
     amountField: {
         width: "80%",
-        height: "90%",
-        borderBottomWidth: 1,
-        borderColor: "black",
+        height: "100%",
+        fontSize:30,
+        color:"red",
         paddingLeft: 20,
     },
     catagoryWrapper: {
         height: 70,
-        marginTop: 50,
+        marginTop: 10,
         flexDirection: "row",
         alignItems: "center",
+        padding:10,
+        borderRadius:10,
+        backgroundColor: "#fff"
+
     },
     catagoryField: {
         width: "80%",
         height: "90%",
-        borderBottomWidth: 1,
-        borderColor: "black",
         paddingLeft: 20,
     },
     noteWrapper: {
         height: 70,
-        marginTop: 50,
-        marginBottom: 40,
+        marginTop: 10,
+        marginBottom: 20,
         flexDirection: "row",
         alignItems: "center",
+        padding:10,
+        borderRadius:10,
+        backgroundColor: "#fff"
+
     },
     noteField: {
         width: "80%",
         height: "90%",
-        borderBottomWidth: 1,
-        borderColor: "black",
         paddingLeft: 20,
     },
     submitButton: {
         height: 50,
         alignItems: "center",
         justifyContent: "center",
-        paddingHorizontal: 100,
         borderRadius: 10,
-        backgroundColor: "#035397",
+        backgroundColor: "#D83A56",
     },
 
     buttonText: {

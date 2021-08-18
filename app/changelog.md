@@ -21,3 +21,7 @@
 > Chnagelog: v-0.1.5
 
 - Add money form added.
+
+> Chnagelog: v-0.1.6
+
+- Form design done.
