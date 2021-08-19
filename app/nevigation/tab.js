@@ -5,13 +5,12 @@ import AddEpenses from '../screens/addEpenses';
 import AddMoney from '../screens/addMoney';
 import Homescreen from '../screens/homescreen';
 
-
-
 const Tab = createBottomTabNavigator();
 
 const Tabs = () => {
 
     return (
+
         <Tab.Navigator
             tabBarOptions={{
                 showLabel: false,
@@ -28,7 +27,6 @@ const Tabs = () => {
                 }
             }}
         >
-
             <Tab.Screen name="AddMoney" component={AddMoney} options={{
                 tabBarIcon: ({ focused }) => (
                     <View style={{
@@ -95,31 +93,8 @@ const Tabs = () => {
                     </View>
                 ),
             }} />
-            {/* <Tab.Screen name="Log" component={Transaction} options={{
-                tabBarIcon: ({ focused }) => (
-                    <View style={{
-                        alignItems: "center",
-                        justifyContent: "center",
-                        // top: 10,
-                    }}>
-                        <Image source={require('../assets/icon/transaction.png')}
-                            resizeMode="contain"
-                            style={{
-                                width: 25,
-                                height: 25,
-                                tintColor: focused ? "#e32f45" : "#748c94"
-                            }}
-                        />
-                        <Text style={{
-                            color: focused ? "#e32f45" : "#748c94",
-                            fontSize: 12
-                        }}>Transaction</Text>
-                    </View>
-                ),
-            }} /> */}
-
-
         </Tab.Navigator>
+
     )
 }
 

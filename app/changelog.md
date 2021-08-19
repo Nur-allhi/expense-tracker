@@ -1,4 +1,8 @@
-#### Expense Tracker,
+## Expense Tracker
+
+#### Author: Nur e allhi
+
+**Developer changelog to track the code changes every time when start to code.**
 
 > Chnagelog: v-0.1.1
 
@@ -30,3 +34,8 @@
 
 - balance input fixed.
 - Inputed balance can be store in a array.
+
+> Chnagelog: v-0.1.8
+
+- From the user inputed data Total balance can be calculate.
+- used Array reducer.
