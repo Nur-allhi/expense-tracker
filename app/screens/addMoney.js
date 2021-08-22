@@ -1,15 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Controller, useForm } from "react-hook-form";
 import { Image, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 
 
 
-const AddMoney = () => {
-    const [newBalance, setNewbalance] = useState([])
-    const { control, handleSubmit, reset } = useForm();
 
-    // Form submit and process the form data to setThe value:
+const AddMoney = () => {
+    const { control, handleSubmit, reset } = useForm();
+    
+   
+
+    const [inputedBalance, setInputedbalance] = useState([])
+
+
+
+
+    // process the form data to setThe value:
     const onSubmit = (data) => {
         const { inputBalance, title } = data
 
@@ -17,17 +24,28 @@ const AddMoney = () => {
             formBalance: parseFloat(inputBalance),
             title: title
         }
-        setNewbalance([...newBalance, newEntry])
-        updateTheBalance()
+        setInputedbalance([...inputedBalance, newEntry])
         reset("")
     };
 
-    // Total of the balance:
+
+
+    useEffect(() => {
+        // // Total of the balance:
+        const arraybalanceTotal = inputedBalance.reduce((acc, formEntry) => {
+            return acc + formEntry.formBalance;
+        }, 0)
+        // setBalance(arraybalanceTotal)
+        console.log("Total=", arraybalanceTotal)
+    }, [onSubmit])
+
+
+
+    
     // const updateTheBalance = () => {
-    //     const arraybalanceTotal = newBalance.reduce((acc, formEntry) => {
+    //     const arraybalanceTotal = inputedBalance.reduce((acc, formEntry) => {
     //         return acc + formEntry.formBalance;
     //     }, 0)
-    //     setTotalBalance(arraybalanceTotal)
     //     console.log("Total=", arraybalanceTotal)
     // }
 

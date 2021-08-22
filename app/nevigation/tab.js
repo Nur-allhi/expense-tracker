@@ -12,9 +12,11 @@ const Tabs = () => {
     return (
 
         <Tab.Navigator
+            initialRouteName="Home"
             tabBarOptions={{
                 showLabel: false,
                 keyboardHidesTabBar: true,
+                initialRouteName: "Home",
                 style: {
                     position: "absolute",
                     bottom: 10,
@@ -32,7 +34,6 @@ const Tabs = () => {
                     <View style={{
                         alignItems: "center",
                         justifyContent: "center",
-                        // top: 10,
                     }}>
                         <Image source={require('../assets/icon/add.png')}
                             resizeMode="contain"
@@ -54,7 +55,6 @@ const Tabs = () => {
                     <View style={{
                         alignItems: "center",
                         justifyContent: "center",
-                        // top: 10,
                     }}>
                         <Image source={require('../assets/icon/home.png')}
                             resizeMode="contain"
@@ -76,7 +76,6 @@ const Tabs = () => {
                     <View style={{
                         alignItems: "center",
                         justifyContent: "center",
-                        // top: 10,
                     }}>
                         <Image source={require('../assets/icon/expenses.png')}
                             resizeMode="contain"

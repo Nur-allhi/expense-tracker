@@ -39,3 +39,7 @@
 
 - From the user inputed data Total balance can be calculate.
 - used Array reducer.
+
+> Chnagelog: v-0.1.9
+
+- App can opened with home screen.
