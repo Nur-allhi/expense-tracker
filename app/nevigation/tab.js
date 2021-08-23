@@ -5,8 +5,9 @@ import AddEpenses from '../screens/addEpenses';
 import AddMoney from '../screens/addMoney';
 import Homescreen from '../screens/homescreen';
 
-const Tab = createBottomTabNavigator();
 
+
+const Tab = createBottomTabNavigator();
 const Tabs = () => {
 
     return (

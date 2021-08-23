@@ -2,7 +2,7 @@
 
 #### Author: Nur e allhi
 
-**Developer changelog to track the code changes every time when start to code.**
+**Developer changelog to track the code </br> changes every time when starting to code on newday.**
 
 > Chnagelog: v-0.1.1
 
@@ -43,3 +43,8 @@
 > Chnagelog: v-0.1.9
 
 - App can opened with home screen.
+
+> Chnagelog: v-0.2.0
+
+- Added balance can show now on the home screen.
+- Cycle wrong error has muted for better development.

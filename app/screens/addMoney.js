@@ -1,20 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Controller, useForm } from "react-hook-form";
 import { Image, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-
-
+import { balanceContext } from '../../App';
 
 
 
 const AddMoney = () => {
+    // Here i want to acess those states:
+    const { balance, setBalance } = useContext(balanceContext)
+
     const { control, handleSubmit, reset } = useForm();
-    
-   
-
     const [inputedBalance, setInputedbalance] = useState([])
-
-
-
 
     // process the form data to setThe value:
     const onSubmit = (data) => {
@@ -28,27 +24,16 @@ const AddMoney = () => {
         reset("")
     };
 
-
-
     useEffect(() => {
         // // Total of the balance:
         const arraybalanceTotal = inputedBalance.reduce((acc, formEntry) => {
             return acc + formEntry.formBalance;
         }, 0)
-        // setBalance(arraybalanceTotal)
-        console.log("Total=", arraybalanceTotal)
+        setBalance(arraybalanceTotal)
+        // console.log("Total=", arraybalanceTotal)
     }, [onSubmit])
 
-
-
     
-    // const updateTheBalance = () => {
-    //     const arraybalanceTotal = inputedBalance.reduce((acc, formEntry) => {
-    //         return acc + formEntry.formBalance;
-    //     }, 0)
-    //     console.log("Total=", arraybalanceTotal)
-    // }
-
     return (
         <View style={styles.container}>
             <StatusBar
@@ -179,7 +164,5 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
 })
-
-
 export default AddMoney
 

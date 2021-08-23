@@ -1,20 +1,31 @@
 import { NavigationContainer } from '@react-navigation/native';
-import React from 'react';
+import React, { createContext, useState } from 'react';
+import { LogBox } from 'react-native';
 import Tabs from './app/nevigation/tab';
 
-const App = () => {
-  // const [balance, setBalance] = useState({})
 
+export const balanceContext = createContext();
+
+
+function App() {
+  const [balance, setBalance] = useState({})
+
+  // console.log("TotalBalanceAppJS=", balance)
+
+  LogBox.ignoreLogs([
+    'Require cycle:'
+  ]);
   return (
-    
-      <NavigationContainer>
-        <Tabs />
-      </NavigationContainer>
-   
-  );
+    <>
+      <balanceContext.Provider value={{ balance, setBalance }}>
+        <NavigationContainer>
+          <Tabs />
+        </NavigationContainer>
+      </balanceContext.Provider>
+
+    </>
+  )
 }
-
-
 
 export default App;
 

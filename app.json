@@ -28,6 +28,6 @@
     "web": {
       "favicon": "./app/assets/favicon.png"
     },
-    "description": "With this application, you can monitor your expenses and your current balance."
+    "description": "> Features:\n\n1. User can add a balance to the account.\n2. Users can add their expenses.\n3. Overall user can monitor their expense and incomes at a time.\n4. This app contains over all three screens.\n5. Simple and user-friendly app this one.\n6. user can navigate one screen to another with the help of Bottom tab navigation.\n7. And many more."
   }
 }

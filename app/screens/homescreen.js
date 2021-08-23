@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Image, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { balanceContext } from './../../App';
 
 function Homescreen(props) {
+    const { balance } = useContext(balanceContext)
+    
+
+
     return (
         <View style={styles.container}>
             <StatusBar
@@ -18,7 +23,7 @@ function Homescreen(props) {
             <View style={styles.currentStatusWrapper}>
                 <TouchableOpacity style={styles.balance}>
                     <Text style={styles.balnceTitile}>Total Balance</Text>
-                    <Text style={styles.balanceAmount}>$1390.50</Text>
+                    <Text style={styles.balanceAmount}>${balance}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.spendings}>
                     <Text style={styles.spendingTitle}>Total spendings</Text>
