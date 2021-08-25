@@ -1,11 +1,9 @@
 import React, { useContext } from 'react';
 import { Image, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { balanceContext } from './../../App';
+import { UserContext } from './../Context/userContext';
 
 function Homescreen(props) {
-    const { balance } = useContext(balanceContext)
-    
-
+    const { balance } = useContext(UserContext)
 
     return (
         <View style={styles.container}>

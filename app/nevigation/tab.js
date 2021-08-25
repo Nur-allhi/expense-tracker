@@ -11,13 +11,11 @@ const Tab = createBottomTabNavigator();
 const Tabs = () => {
 
     return (
-
         <Tab.Navigator
             initialRouteName="Home"
             tabBarOptions={{
                 showLabel: false,
                 keyboardHidesTabBar: true,
-                initialRouteName: "Home",
                 style: {
                     position: "absolute",
                     bottom: 10,
@@ -99,6 +97,7 @@ const Tabs = () => {
 }
 
 
+export default Tabs;
 
 const styles = StyleSheet.create({
     shadow: {
@@ -112,4 +111,3 @@ const styles = StyleSheet.create({
         elevation: 5,
     }
 })
-export default Tabs;

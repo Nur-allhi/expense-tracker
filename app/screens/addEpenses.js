@@ -1,13 +1,50 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Controller, useForm } from "react-hook-form";
-import { Image, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Image, Keyboard, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { UserContext } from './../Context/userContext';
 
 const AddEpenses = () => {
-    const { control, handleSubmit } = useForm();
+    const { control, handleSubmit, reset } = useForm();
+    const [inputedExpense, setInputedExpense] = useState([])
+    const { balance, setBalance } = useContext(UserContext)
+
+    useEffect(() => {
+        const arrayTotalExpense = inputedExpense.reduce((acc, formEntry) => {
+            return acc + formEntry.formExpense;
+        }, 0)
+        console.log(arrayTotalExpense)
+        console.log(balance)
+    }, [onSubmit])
+
     const onSubmit = (data) => {
-        console.log(data)
-        
+        const { formExpense, expenseCatagory, expenseNote } = data
+
+        const newExpenseEntry = {
+            formExpense: parseFloat(formExpense),
+            expenseCatagory: expenseCatagory,
+            expenseNote: expenseNote
+        }
+        setInputedExpense([...inputedExpense, newExpenseEntry])
+        Keyboard.dismiss()
+        reset()
     };
+
+    useEffect(() => {
+        const arrayTotalExpense = inputedExpense.reduce((acc, formEntry) => {
+            return acc + formEntry.formExpense;
+        }, 0)
+
+        const currentBalance = balance - arrayTotalExpense
+        console.log("Line-38", arrayTotalExpense)
+        console.log("line-39", balance)
+        setBalance(currentBalance)
+    }, [onSubmit])
+
+
+
+
+
+
     return (
         <View style={styles.conatiner}>
             <StatusBar
@@ -27,7 +64,7 @@ const AddEpenses = () => {
                     rules={{
                         required: true,
                     }}
-                    render={({ field: { onChange, value } }) => (
+                    render={({ field: { onChange, onBlur, value } }) => (
                         <View style={styles.amountWrapper}>
                             <Image style={{
                                 width: 40,
@@ -37,13 +74,13 @@ const AddEpenses = () => {
                                 keyboardType={'phone-pad'}
                                 style={styles.amountField}
                                 placeholder="Amount"
-                                // onBlur={onBlur}
+                                onBlur={onBlur}
                                 onChangeText={onChange}
                                 value={value}
                             />
                         </View>
                     )}
-                    name="Amount"
+                    name="formExpense"
                     defaultValue=""
                 />
                 {/* Catagory */}
@@ -66,7 +103,7 @@ const AddEpenses = () => {
                             />
                         </View>
                     )}
-                    name="catagory"
+                    name="expenseCatagory"
                     defaultValue=""
                 />
                 {/* Notes */}
@@ -89,7 +126,7 @@ const AddEpenses = () => {
                             />
                         </View>
                     )}
-                    name="note"
+                    name="expenseNote"
                     defaultValue=""
                 />
                 <TouchableOpacity style={styles.submitButton} onPress={handleSubmit(onSubmit)}>
@@ -124,15 +161,15 @@ const styles = StyleSheet.create({
         height: 90,
         flexDirection: "row",
         alignItems: "center",
-        padding:10,
-        borderRadius:10,
+        padding: 10,
+        borderRadius: 10,
         backgroundColor: "#fff"
     },
     amountField: {
         width: "80%",
         height: "100%",
-        fontSize:30,
-        color:"red",
+        fontSize: 30,
+        color: "red",
         paddingLeft: 20,
     },
     catagoryWrapper: {
@@ -140,8 +177,8 @@ const styles = StyleSheet.create({
         marginTop: 10,
         flexDirection: "row",
         alignItems: "center",
-        padding:10,
-        borderRadius:10,
+        padding: 10,
+        borderRadius: 10,
         backgroundColor: "#fff"
 
     },
@@ -156,8 +193,8 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         flexDirection: "row",
         alignItems: "center",
-        padding:10,
-        borderRadius:10,
+        padding: 10,
+        borderRadius: 10,
         backgroundColor: "#fff"
 
     },

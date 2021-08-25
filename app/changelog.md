@@ -48,3 +48,8 @@
 
 - Added balance can show now on the home screen.
 - Cycle wrong error has muted for better development.
+
+> Chnagelog: v-0.2.1
+
+- Cycle wrong error has muted for better development [Fixed]
+- Nevigation need refector !
