@@ -4,17 +4,15 @@ import { Image, Keyboard, StatusBar, StyleSheet, Text, TextInput, TouchableOpaci
 import { UserContext } from './../Context/userContext';
 
 const AddEpenses = () => {
-    const { control, handleSubmit, reset } = useForm();
-    const [inputedExpense, setInputedExpense] = useState([])
-    const { balance, setBalance } = useContext(UserContext)
+    // Global States:
+    const { Balance, Expense } = useContext(UserContext)
+    const { totalbalance, setTotalBalance } = Balance
+    const { totalExpense, setTotalExpense } = Expense
 
-    useEffect(() => {
-        const arrayTotalExpense = inputedExpense.reduce((acc, formEntry) => {
-            return acc + formEntry.formExpense;
-        }, 0)
-        console.log(arrayTotalExpense)
-        console.log(balance)
-    }, [onSubmit])
+    // Local State:
+    const [inputedExpense, setInputedExpense] = useState([])
+
+    const { control, handleSubmit, reset } = useForm();
 
     const onSubmit = (data) => {
         const { formExpense, expenseCatagory, expenseNote } = data
@@ -33,17 +31,13 @@ const AddEpenses = () => {
         const arrayTotalExpense = inputedExpense.reduce((acc, formEntry) => {
             return acc + formEntry.formExpense;
         }, 0)
-
-        const currentBalance = balance - arrayTotalExpense
+        
+        setTotalExpense(arrayTotalExpense)
+        const currentBalance = totalbalance - arrayTotalExpense
         console.log("Line-38", arrayTotalExpense)
-        console.log("line-39", balance)
-        setBalance(currentBalance)
-    }, [onSubmit])
-
-
-
-
-
+        console.log("line-39", totalbalance)
+        setTotalBalance(currentBalance)
+    }, [inputedExpense])
 
     return (
         <View style={styles.conatiner}>

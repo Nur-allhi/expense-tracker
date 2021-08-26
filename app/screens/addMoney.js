@@ -6,17 +6,23 @@ import { UserContext } from './../Context/userContext';
 
 
 const AddMoney = () => {
-    // Here i want to acess those states:
-    const { balance, setBalance } = useContext(UserContext)
 
+    const { Balance } = useContext(UserContext)
+    const { totalbalance, setTotalBalance } = Balance
+    const [inputedBalance, setInputedbalance] = useState([])
     const { control, handleSubmit, reset } = useForm();
 
-    const [inputedBalance, setInputedbalance] = useState([])
+    useEffect(() => {
+        const arraybalanceTotal = inputedBalance.reduce((acc, formEntry) => {
+            return acc + formEntry.formBalance;
+        }, 0)
+        setTotalBalance(arraybalanceTotal);
+    }, [])
+
 
     // process the form data to setThe value:
     const onSubmit = (data) => {
         const { formBalance, title } = data
-
         const newBalanceEntry = {
             formBalance: parseFloat(formBalance),
             title: title
@@ -24,16 +30,8 @@ const AddMoney = () => {
         setInputedbalance([...inputedBalance, newBalanceEntry])
         Keyboard.dismiss()
         reset("")
+        console.log("inputedBalance", inputedBalance)
     };
-
-    useEffect(() => {
-        // // Total of the balance:
-        const arraybalanceTotal = inputedBalance.reduce((acc, formEntry) => {
-            return acc + formEntry.formBalance;
-        }, 0)
-        setBalance(arraybalanceTotal)
-    }, [onSubmit])
-
 
     return (
         <View style={styles.container}>

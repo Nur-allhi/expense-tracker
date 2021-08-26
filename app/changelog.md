@@ -53,3 +53,9 @@
 
 - Cycle wrong error has muted for better development [Fixed]
 - Nevigation need refector !
+
+> Chnagelog: v-0.2.2
+
+- bottom tab removed to fixed the stuck issue.
+- Stack navigation added.
+- clicking the balance and expense block , user can navigate.

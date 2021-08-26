@@ -2,8 +2,12 @@ import React, { useContext } from 'react';
 import { Image, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { UserContext } from './../Context/userContext';
 
-function Homescreen(props) {
-    const { balance } = useContext(UserContext)
+function Homescreen({ navigation }) {
+
+    // Global States:
+    const { Balance, Expense } = useContext(UserContext)
+    const { totalbalance, setTotalBalance } = Balance
+    const { totalExpense, setTotalExpense } = Expense
 
     return (
         <View style={styles.container}>
@@ -19,16 +23,27 @@ function Homescreen(props) {
                 </Text>
             </View>
             <View style={styles.currentStatusWrapper}>
-                <TouchableOpacity style={styles.balance}>
+                <TouchableOpacity style={styles.balance}
+                    onPress={() => navigation.push('AddBalance')}>
                     <Text style={styles.balnceTitile}>Total Balance</Text>
-                    <Text style={styles.balanceAmount}>${balance}</Text>
+                    <Text style={styles.balanceAmount}>${totalbalance}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.spendings}>
+                <TouchableOpacity style={styles.spendings}
+                    onPress={() => navigation.push('AddExpense')} >
                     <Text style={styles.spendingTitle}>Total spendings</Text>
-                    <Text style={styles.spendingAmount}>- $320.60</Text>
+                    <Text style={styles.spendingAmount}>- ${totalExpense}</Text>
                 </TouchableOpacity>
             </View>
-
+            {/* <View style={styles.btnContainer}>
+                <TouchableOpacity style={styles.AddBalanceBtn}
+                    onPress={() => navigation.push('AddBalance')}>
+                    <Text>Add Balance</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.AddExpenseeBtn}
+                    onPress={() => navigation.push('AddExpense')} >
+                    <Text>Add Expense</Text>
+                </TouchableOpacity>
+            </View> */}
 
 
         </View>
@@ -100,7 +115,13 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         color: "#fff",
     },
-
+    btnContainer: {
+        marginTop: 30,
+        flexDirection: 'row',
+        justifyContent: "space-around",
+    },
+    AddBalanceBtn: {},
+    AddExpenseeBtn: {},
 })
 
 export default Homescreen;
