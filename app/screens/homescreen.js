@@ -34,6 +34,8 @@ function Homescreen({ navigation }) {
                     <Text style={styles.spendingAmount}>- ${totalExpense}</Text>
                 </TouchableOpacity>
             </View>
+
+            
             {/* <View style={styles.btnContainer}>
                 <TouchableOpacity style={styles.AddBalanceBtn}
                     onPress={() => navigation.push('AddBalance')}>

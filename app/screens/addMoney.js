@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Controller, useForm } from "react-hook-form";
 import { Image, Keyboard, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { UserContext } from './../Context/userContext';
@@ -12,14 +12,6 @@ const AddMoney = () => {
     const [inputedBalance, setInputedbalance] = useState([])
     const { control, handleSubmit, reset } = useForm();
 
-    useEffect(() => {
-        const arraybalanceTotal = inputedBalance.reduce((acc, formEntry) => {
-            return acc + formEntry.formBalance;
-        }, 0)
-        setTotalBalance(arraybalanceTotal);
-    }, [])
-
-
     // process the form data to setThe value:
     const onSubmit = (data) => {
         const { formBalance, title } = data
@@ -27,11 +19,26 @@ const AddMoney = () => {
             formBalance: parseFloat(formBalance),
             title: title
         }
-        setInputedbalance([...inputedBalance, newBalanceEntry])
+        // setInputedbalance([...inputedBalance, newBalanceEntry])
+        setInputedbalance(prevState => [...prevState, newBalanceEntry])
         Keyboard.dismiss()
         reset("")
-        console.log("inputedBalance", inputedBalance)
     };
+    console.log(inputedBalance)
+
+    // if (data) {
+    //     totalBalanceCalculate()
+    // } else {
+    //     console.log("Blank input")
+    // }
+
+    // const totalBalanceCalculate = () => {
+    //     const arraybalanceTotal = inputedBalance.reduce((acc, formEntry) => {
+    //         return acc + formEntry.formBalance;
+    //     }, 0)
+    //     setTotalBalance(arraybalanceTotal);
+    //     console.log("From AddMoney=", totalbalance)
+    // }
 
     return (
         <View style={styles.container}>

@@ -31,7 +31,6 @@ const AddEpenses = () => {
         const arrayTotalExpense = inputedExpense.reduce((acc, formEntry) => {
             return acc + formEntry.formExpense;
         }, 0)
-        
         setTotalExpense(arrayTotalExpense)
         const currentBalance = totalbalance - arrayTotalExpense
         console.log("Line-38", arrayTotalExpense)

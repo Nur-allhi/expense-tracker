@@ -59,3 +59,7 @@
 - bottom tab removed to fixed the stuck issue.
 - Stack navigation added.
 - clicking the balance and expense block , user can navigate.
+
+> Chnagelog: v-0.2.3
+
+- Code refecored.
