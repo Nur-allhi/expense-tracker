@@ -1,16 +1,35 @@
-import React, { useContext, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useContext, useEffect, useState } from 'react';
 import { Controller, useForm } from "react-hook-form";
 import { Image, Keyboard, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { UserContext } from './../Context/userContext';
 
+// const AddMoney = () => {
 
+// }
 
 const AddMoney = () => {
-
     const { Balance } = useContext(UserContext)
     const { totalbalance, setTotalBalance } = Balance
     const [inputedBalance, setInputedbalance] = useState([])
     const { control, handleSubmit, reset } = useForm();
+
+    useEffect(() => {
+        getDataFromTheDevice();
+    }, [])
+
+    useEffect(() => {
+        saveDataToThedevice(inputedBalance);
+    }, [inputedBalance])
+
+    useEffect(() => {
+        const arraybalanceTotal = inputedBalance.reduce((acc, formEntry) => {
+            return acc + formEntry.formBalance;
+        }, 0)
+        setTotalBalance(arraybalanceTotal);
+        console.log("From AddMoney=", totalbalance)
+    }, [inputedBalance])
+
 
     // process the form data to setThe value:
     const onSubmit = (data) => {
@@ -19,26 +38,50 @@ const AddMoney = () => {
             formBalance: parseFloat(formBalance),
             title: title
         }
-        // setInputedbalance([...inputedBalance, newBalanceEntry])
-        setInputedbalance(prevState => [...prevState, newBalanceEntry])
+        setInputedbalance([...inputedBalance, newBalanceEntry])
         Keyboard.dismiss()
         reset("")
+        // setInputedbalance([])
     };
+
+
     console.log(inputedBalance)
 
-    // if (data) {
-    //     totalBalanceCalculate()
-    // } else {
-    //     console.log("Blank input")
-    // }
+    const getDataFromTheDevice = async () => {
+        try {
+            const balanceData = await AsyncStorage.getItem("BalanceData");
+            if (balanceData != null) {
+                setInputedbalance(JSON.parse(balanceData))
+                console.log("Successfully got the data")
 
-    // const totalBalanceCalculate = () => {
-    //     const arraybalanceTotal = inputedBalance.reduce((acc, formEntry) => {
-    //         return acc + formEntry.formBalance;
-    //     }, 0)
-    //     setTotalBalance(arraybalanceTotal);
-    //     console.log("From AddMoney=", totalbalance)
-    // }
+            }
+        } catch (error) {
+            console.log("GetItem =", error)
+        }
+    }
+
+    const saveDataToThedevice = async (inputedBalance) => {
+        try {
+            const stringyfyData = JSON.stringify(inputedBalance)
+            if (stringyfyData != null) {
+                await AsyncStorage.setItem("BalanceData", stringyfyData)
+                console.log("Successfully saved the data")
+            }
+        } catch (error) {
+            console.log("SetItem =", error)
+        }
+
+    }
+
+
+
+    useEffect(() => {
+        const arraybalanceTotal = inputedBalance.reduce((acc, formEntry) => {
+            return acc + formEntry.formBalance;
+        }, 0)
+        setTotalBalance(arraybalanceTotal);
+        console.log("From AddMoney=", totalbalance)
+    }, [inputedBalance])
 
     return (
         <View style={styles.container}>

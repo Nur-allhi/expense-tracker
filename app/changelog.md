@@ -63,3 +63,7 @@
 > Chnagelog: v-0.2.3
 
 - Code refecored.
+
+> Chnagelog: v-0.2.4
+
+- Added balance data can be store in device.
