@@ -1,17 +1,15 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Controller, useForm } from "react-hook-form";
 import { Image, Keyboard, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { UserContext } from './../Context/userContext';
 
-// const AddMoney = () => {
-
-// }
 
 const AddMoney = () => {
-    const { Balance } = useContext(UserContext)
-    const { totalbalance, setTotalBalance } = Balance
-    const [inputedBalance, setInputedbalance] = useState([])
+    const {
+        totalbalance, setTotalBalance, balanceData, setBalanceData,
+    } = useContext(UserContext)
+
     const { control, handleSubmit, reset } = useForm();
 
     useEffect(() => {
@@ -19,16 +17,16 @@ const AddMoney = () => {
     }, [])
 
     useEffect(() => {
-        saveDataToThedevice(inputedBalance);
-    }, [inputedBalance])
+        saveDataToThedevice(balanceData);
+    }, [balanceData])
 
     useEffect(() => {
-        const arraybalanceTotal = inputedBalance.reduce((acc, formEntry) => {
+        const arraybalanceTotal = balanceData.reduce((acc, formEntry) => {
             return acc + formEntry.formBalance;
         }, 0)
         setTotalBalance(arraybalanceTotal);
         console.log("From AddMoney=", totalbalance)
-    }, [inputedBalance])
+    }, [balanceData])
 
 
     // process the form data to setThe value:
@@ -38,20 +36,20 @@ const AddMoney = () => {
             formBalance: parseFloat(formBalance),
             title: title
         }
-        setInputedbalance([...inputedBalance, newBalanceEntry])
+        setBalanceData([...balanceData, newBalanceEntry])
         Keyboard.dismiss()
         reset("")
-        // setInputedbalance([])
+        // setBalanceData([])
     };
 
 
-    console.log(inputedBalance)
+    console.log(balanceData)
 
     const getDataFromTheDevice = async () => {
         try {
             const balanceData = await AsyncStorage.getItem("BalanceData");
             if (balanceData != null) {
-                setInputedbalance(JSON.parse(balanceData))
+                setBalanceData(JSON.parse(balanceData))
                 console.log("Successfully got the data")
 
             }
@@ -60,9 +58,9 @@ const AddMoney = () => {
         }
     }
 
-    const saveDataToThedevice = async (inputedBalance) => {
+    const saveDataToThedevice = async (balanceData) => {
         try {
-            const stringyfyData = JSON.stringify(inputedBalance)
+            const stringyfyData = JSON.stringify(balanceData)
             if (stringyfyData != null) {
                 await AsyncStorage.setItem("BalanceData", stringyfyData)
                 console.log("Successfully saved the data")
@@ -76,12 +74,12 @@ const AddMoney = () => {
 
 
     useEffect(() => {
-        const arraybalanceTotal = inputedBalance.reduce((acc, formEntry) => {
+        const arraybalanceTotal = balanceData.reduce((acc, formEntry) => {
             return acc + formEntry.formBalance;
         }, 0)
         setTotalBalance(arraybalanceTotal);
         console.log("From AddMoney=", totalbalance)
-    }, [inputedBalance])
+    }, [balanceData])
 
     return (
         <View style={styles.container}>

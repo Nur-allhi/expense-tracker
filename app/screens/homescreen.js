@@ -5,9 +5,8 @@ import { UserContext } from './../Context/userContext';
 function Homescreen({ navigation }) {
 
     // Global States:
-    const { Balance, Expense } = useContext(UserContext)
-    const { totalbalance, setTotalBalance } = Balance
-    const { totalExpense, setTotalExpense } = Expense
+    const { totalbalance, totalExpense } = useContext(UserContext)
+
 
     return (
         <View style={styles.container}>
@@ -35,7 +34,7 @@ function Homescreen({ navigation }) {
                 </TouchableOpacity>
             </View>
 
-            
+
             {/* <View style={styles.btnContainer}>
                 <TouchableOpacity style={styles.AddBalanceBtn}
                     onPress={() => navigation.push('AddBalance')}>

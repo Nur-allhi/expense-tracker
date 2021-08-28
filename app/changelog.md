@@ -67,3 +67,8 @@
 > Chnagelog: v-0.2.4
 
 - Added balance data can be store in device.
+
+> Chnagelog: v-0.2.5
+
+- Base refactored.
+- Context file is separte now. State can be manage easily.

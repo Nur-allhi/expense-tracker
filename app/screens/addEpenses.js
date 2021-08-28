@@ -5,9 +5,10 @@ import { UserContext } from './../Context/userContext';
 
 const AddEpenses = () => {
     // Global States:
-    const { Balance, Expense } = useContext(UserContext)
-    const { totalbalance, setTotalBalance } = Balance
-    const { totalExpense, setTotalExpense } = Expense
+    const {
+        totalbalance, setTotalBalance, totalExpense, setTotalExpense, expenseData,
+        setExpenseData } = useContext(UserContext)
+
 
     // Local State:
     const [inputedExpense, setInputedExpense] = useState([])
@@ -38,6 +39,9 @@ const AddEpenses = () => {
         setTotalBalance(currentBalance)
     }, [inputedExpense])
 
+
+
+    
     return (
         <View style={styles.conatiner}>
             <StatusBar
