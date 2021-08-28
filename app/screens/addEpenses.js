@@ -1,47 +1,37 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Controller, useForm } from "react-hook-form";
 import { Image, Keyboard, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { UserContext } from './../Context/userContext';
 
 const AddEpenses = () => {
-    // Global States:
-    const {
-        totalbalance, setTotalBalance, totalExpense, setTotalExpense, expenseData,
-        setExpenseData } = useContext(UserContext)
-
-
-    // Local State:
-    const [inputedExpense, setInputedExpense] = useState([])
-
+    const { totalExpense, setTotalExpense, expenseData, setExpenseData } = useContext(UserContext)
     const { control, handleSubmit, reset } = useForm();
 
     const onSubmit = (data) => {
         const { formExpense, expenseCatagory, expenseNote } = data
 
         const newExpenseEntry = {
+            id: Math.random(),
             formExpense: parseFloat(formExpense),
             expenseCatagory: expenseCatagory,
             expenseNote: expenseNote
         }
-        setInputedExpense([...inputedExpense, newExpenseEntry])
+        console.log("ExpenseEntry =", newExpenseEntry)
+        setExpenseData([...expenseData, newExpenseEntry])
         Keyboard.dismiss()
         reset()
     };
 
+
+    
     useEffect(() => {
-        const arrayTotalExpense = inputedExpense.reduce((acc, formEntry) => {
+        const arrayTotalExpense = expenseData.reduce((acc, formEntry) => {
             return acc + formEntry.formExpense;
         }, 0)
         setTotalExpense(arrayTotalExpense)
-        const currentBalance = totalbalance - arrayTotalExpense
-        console.log("Line-38", arrayTotalExpense)
-        console.log("line-39", totalbalance)
-        setTotalBalance(currentBalance)
-    }, [inputedExpense])
+    }, [expenseData])
 
-
-
-    
+    console.log("Total expense= ",totalExpense)
     return (
         <View style={styles.conatiner}>
             <StatusBar

@@ -72,3 +72,7 @@
 
 - Base refactored.
 - Context file is separte now. State can be manage easily.
+
+> Chnagelog: v-0.2.6
+
+- Balance (data and List of data) can be store on the device.

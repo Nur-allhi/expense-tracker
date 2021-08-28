@@ -1,12 +1,25 @@
-import React, { useContext } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useContext, useEffect } from 'react';
 import { Image, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { UserContext } from './../Context/userContext';
 
 function Homescreen({ navigation }) {
+    const { totalbalance, totalExpense, setTotalBalance, balanceData, setBalanceData } = useContext(UserContext)
 
-    // Global States:
-    const { totalbalance, totalExpense } = useContext(UserContext)
+    useEffect(() => {
+        getTotalBalanceFromDevice();
+    }, [])
 
+    const getTotalBalanceFromDevice = async () => {
+        try {
+            const balance = await AsyncStorage.getItem("TotalBalance")
+            if (balance != null) {
+                setTotalBalance(balance)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <View style={styles.container}>
@@ -25,7 +38,7 @@ function Homescreen({ navigation }) {
                 <TouchableOpacity style={styles.balance}
                     onPress={() => navigation.push('AddBalance')}>
                     <Text style={styles.balnceTitile}>Total Balance</Text>
-                    <Text style={styles.balanceAmount}>${totalbalance}</Text>
+                    <Text style={styles.balanceAmount}>${totalbalance - totalExpense}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.spendings}
                     onPress={() => navigation.push('AddExpense')} >

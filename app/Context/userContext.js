@@ -6,12 +6,31 @@ export const UserContext = createContext();
 
 
 
-export default function userContext({ children }) {
+export default function UserProvider({ children }) {
 
     const [totalbalance, setTotalBalance] = useState('')
     const [totalExpense, setTotalExpense] = useState('')
     const [balanceData, setBalanceData] = useState([])
     const [expenseData, setExpenseData] = useState([])
+
+
+    
+
+    
+    // const getDataFromTheDevice = async () => {
+    //     try {
+    //         const balanceData = await AsyncStorage.getItem("BalanceData");
+    //         if (balanceData != null) {
+    //             setBalanceData(JSON.parse(balanceData))
+    //             console.log("Successfully got the data")
+
+    //         }
+    //     } catch (error) {
+    //         console.log("GetItem =", error)
+    //     }
+    // }
+
+    
 
     return (
         <>
@@ -24,7 +43,6 @@ export default function userContext({ children }) {
                 setBalanceData,
                 expenseData,
                 setExpenseData,
-
             }}>
                 {children}
             </UserContext.Provider>

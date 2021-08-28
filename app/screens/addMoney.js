@@ -6,30 +6,23 @@ import { UserContext } from './../Context/userContext';
 
 
 const AddMoney = () => {
+    const { control, handleSubmit, reset } = useForm();
     const {
         totalbalance, setTotalBalance, balanceData, setBalanceData,
     } = useContext(UserContext)
 
-    const { control, handleSubmit, reset } = useForm();
+    useEffect(() => {
+        getBalanceDataFromTheDevice();
+    }, [])
 
     useEffect(() => {
-        getDataFromTheDevice();
-    }, [])
+        saveTotalbalanceToDevice(totalbalance)
+    }, [totalbalance])
 
     useEffect(() => {
         saveDataToThedevice(balanceData);
     }, [balanceData])
 
-    useEffect(() => {
-        const arraybalanceTotal = balanceData.reduce((acc, formEntry) => {
-            return acc + formEntry.formBalance;
-        }, 0)
-        setTotalBalance(arraybalanceTotal);
-        console.log("From AddMoney=", totalbalance)
-    }, [balanceData])
-
-
-    // process the form data to setThe value:
     const onSubmit = (data) => {
         const { formBalance, title } = data
         const newBalanceEntry = {
@@ -42,44 +35,52 @@ const AddMoney = () => {
         // setBalanceData([])
     };
 
+    useEffect(() => {
+        const arraybalanceTotal = balanceData.reduce((acc, formEntry) => {
+            return acc + formEntry.formBalance;
+        }, 0)
+        setTotalBalance(arraybalanceTotal);
+    }, [balanceData])
 
-    console.log(balanceData)
 
-    const getDataFromTheDevice = async () => {
-        try {
-            const balanceData = await AsyncStorage.getItem("BalanceData");
-            if (balanceData != null) {
-                setBalanceData(JSON.parse(balanceData))
-                console.log("Successfully got the data")
 
-            }
-        } catch (error) {
-            console.log("GetItem =", error)
-        }
-    }
 
     const saveDataToThedevice = async (balanceData) => {
         try {
             const stringyfyData = JSON.stringify(balanceData)
             if (stringyfyData != null) {
                 await AsyncStorage.setItem("BalanceData", stringyfyData)
-                console.log("Successfully saved the data")
             }
         } catch (error) {
-            console.log("SetItem =", error)
+            console.log(error)
         }
 
     }
 
+    const saveTotalbalanceToDevice = async (totalbalance) => {
+        try {
+            const stringyfyTotalbalanceData = JSON.stringify(totalbalance)
+            if (stringyfyTotalbalanceData != null) {
+                await AsyncStorage.setItem("TotalBalance", stringyfyTotalbalanceData)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
+    const getBalanceDataFromTheDevice = async () => {
+        try {
+            const balanceData = await AsyncStorage.getItem("BalanceData");
+            if (balanceData != null) {
 
-    useEffect(() => {
-        const arraybalanceTotal = balanceData.reduce((acc, formEntry) => {
-            return acc + formEntry.formBalance;
-        }, 0)
-        setTotalBalance(arraybalanceTotal);
-        console.log("From AddMoney=", totalbalance)
-    }, [balanceData])
+                setBalanceData(JSON.parse(balanceData))
+                console.log("Successfully got the data")
+
+            }
+        } catch (error) {
+            console.log("Taking balance Data from device =", error)
+        }
+    }
 
     return (
         <View style={styles.container}>
