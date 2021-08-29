@@ -4,10 +4,16 @@ import { Image, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'reac
 import { UserContext } from './../Context/userContext';
 
 function Homescreen({ navigation }) {
-    const { totalbalance, totalExpense, setTotalBalance, balanceData, setBalanceData } = useContext(UserContext)
+    const { setTotalBalance, totalbalance,
+        setBalanceData, balanceData,
+        setTotalExpense, totalExpense,
+        setExpenseData, expenseData } = useContext(UserContext)
 
     useEffect(() => {
         getTotalBalanceFromDevice();
+        getTotalExpenseFromDevice();
+        getBalanceDataFromTheDevice();
+        getExpenseDataFromTheDevice();
     }, [])
 
     const getTotalBalanceFromDevice = async () => {
@@ -20,6 +26,44 @@ function Homescreen({ navigation }) {
             console.log(error)
         }
     }
+
+    const getBalanceDataFromTheDevice = async () => {
+        try {
+            const balanceData = await AsyncStorage.getItem("BalanceData");
+            if (balanceData != null) {
+                setBalanceData(JSON.parse(balanceData))
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    // GEtting the total expense:
+    const getTotalExpenseFromDevice = async () => {
+        try {
+            const expense = await AsyncStorage.getItem("TotalExpense")
+            if (expense != null) {
+                setTotalExpense(expense)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    // Getting expense data
+    const getExpenseDataFromTheDevice = async () => {
+        try {
+            const expenseData = await AsyncStorage.getItem("ExpenseData");
+            if (expenseData != null) {
+                setExpenseData(JSON.parse(expenseData))
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    console.log("BalanceData =", balanceData)
+    console.log("ExpenseData =", expenseData)
 
     return (
         <View style={styles.container}>

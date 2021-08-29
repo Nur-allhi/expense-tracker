@@ -9,8 +9,8 @@ export const UserContext = createContext();
 export default function UserProvider({ children }) {
 
     const [totalbalance, setTotalBalance] = useState('')
-    const [totalExpense, setTotalExpense] = useState('')
     const [balanceData, setBalanceData] = useState([])
+    const [totalExpense, setTotalExpense] = useState('')
     const [expenseData, setExpenseData] = useState([])
 
 

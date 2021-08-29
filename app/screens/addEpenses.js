@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useContext, useEffect } from 'react';
 import { Controller, useForm } from "react-hook-form";
 import { Image, Keyboard, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
@@ -5,8 +6,19 @@ import { UserContext } from './../Context/userContext';
 
 const AddEpenses = () => {
     const { totalExpense, setTotalExpense, expenseData, setExpenseData } = useContext(UserContext)
+    
     const { control, handleSubmit, reset } = useForm();
 
+
+    useEffect(() => {
+        saveExpenseDataToThedevice(expenseData);
+    }, [expenseData])
+
+    useEffect(() => {
+        saveTotalExpenseToDevice(totalExpense);
+    }, [totalExpense])
+
+    
     const onSubmit = (data) => {
         const { formExpense, expenseCatagory, expenseNote } = data
 
@@ -19,11 +31,22 @@ const AddEpenses = () => {
         console.log("ExpenseEntry =", newExpenseEntry)
         setExpenseData([...expenseData, newExpenseEntry])
         Keyboard.dismiss()
+        // setExpenseData([]);
         reset()
     };
 
+    const saveExpenseDataToThedevice = async (expenseData) => {
+        try {
+            const stringyfyData = JSON.stringify(expenseData)
+            if (stringyfyData != null) {
+                await AsyncStorage.setItem("ExpenseData", stringyfyData)
+            }
+        } catch (error) {
+            console.log(error)
+        }
 
-    
+    }
+
     useEffect(() => {
         const arrayTotalExpense = expenseData.reduce((acc, formEntry) => {
             return acc + formEntry.formExpense;
@@ -31,7 +54,21 @@ const AddEpenses = () => {
         setTotalExpense(arrayTotalExpense)
     }, [expenseData])
 
-    console.log("Total expense= ",totalExpense)
+
+    const saveTotalExpenseToDevice = async (totalExpense) => {
+        try {
+            const stringyfyData = JSON.stringify(totalExpense)
+            if (stringyfyData != null) {
+                await AsyncStorage.setItem("TotalExpense", stringyfyData)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
+
+
     return (
         <View style={styles.conatiner}>
             <StatusBar

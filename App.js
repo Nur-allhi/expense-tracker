@@ -5,8 +5,6 @@ import StackNavigations from './app/nevigation/stackNavigations';
 
 
 function App() {
-  // const { setTotalBalance } = useContext(UserContext);
-
   return (
     <UserProvider>
       <NavigationContainer>

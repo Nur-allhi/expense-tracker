@@ -12,20 +12,17 @@ const AddMoney = () => {
     } = useContext(UserContext)
 
     useEffect(() => {
-        getBalanceDataFromTheDevice();
-    }, [])
-
-    useEffect(() => {
         saveTotalbalanceToDevice(totalbalance)
     }, [totalbalance])
 
     useEffect(() => {
-        saveDataToThedevice(balanceData);
+        saveBalanceDataToThedevice(balanceData);
     }, [balanceData])
 
     const onSubmit = (data) => {
         const { formBalance, title } = data
         const newBalanceEntry = {
+            id: Math.random(),
             formBalance: parseFloat(formBalance),
             title: title
         }
@@ -43,9 +40,7 @@ const AddMoney = () => {
     }, [balanceData])
 
 
-
-
-    const saveDataToThedevice = async (balanceData) => {
+    const saveBalanceDataToThedevice = async (balanceData) => {
         try {
             const stringyfyData = JSON.stringify(balanceData)
             if (stringyfyData != null) {
@@ -68,19 +63,7 @@ const AddMoney = () => {
         }
     }
 
-    const getBalanceDataFromTheDevice = async () => {
-        try {
-            const balanceData = await AsyncStorage.getItem("BalanceData");
-            if (balanceData != null) {
 
-                setBalanceData(JSON.parse(balanceData))
-                console.log("Successfully got the data")
-
-            }
-        } catch (error) {
-            console.log("Taking balance Data from device =", error)
-        }
-    }
 
     return (
         <View style={styles.container}>

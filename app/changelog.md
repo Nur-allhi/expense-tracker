@@ -75,4 +75,9 @@
 
 > Chnagelog: v-0.2.6
 
-- Balance (data and List of data) can be store on the device.
+- Balance (Total and List of data) can be store on the device.
+
+> Chnagelog: v-0.2.7
+
+- user can save current balance and expense.
+- those data will store in the device when ever user came back those data will be there.
