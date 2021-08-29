@@ -12,11 +12,12 @@ export default function UserProvider({ children }) {
     const [balanceData, setBalanceData] = useState([])
     const [totalExpense, setTotalExpense] = useState('')
     const [expenseData, setExpenseData] = useState([])
+    const [successModal, setSuccessModal] = useState(false)
 
 
-    
 
-    
+
+
     // const getDataFromTheDevice = async () => {
     //     try {
     //         const balanceData = await AsyncStorage.getItem("BalanceData");
@@ -30,7 +31,7 @@ export default function UserProvider({ children }) {
     //     }
     // }
 
-    
+
 
     return (
         <>
@@ -43,6 +44,8 @@ export default function UserProvider({ children }) {
                 setBalanceData,
                 expenseData,
                 setExpenseData,
+                successModal,
+                setSuccessModal
             }}>
                 {children}
             </UserContext.Provider>

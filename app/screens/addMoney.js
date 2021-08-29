@@ -3,12 +3,13 @@ import React, { useContext, useEffect } from 'react';
 import { Controller, useForm } from "react-hook-form";
 import { Image, Keyboard, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { UserContext } from './../Context/userContext';
+import SuccessModal from './successModal';
 
 
 const AddMoney = () => {
     const { control, handleSubmit, reset } = useForm();
     const {
-        totalbalance, setTotalBalance, balanceData, setBalanceData,
+        totalbalance, setTotalBalance, balanceData, setBalanceData, successModal, setSuccessModal
     } = useContext(UserContext)
 
     useEffect(() => {
@@ -29,7 +30,7 @@ const AddMoney = () => {
         setBalanceData([...balanceData, newBalanceEntry])
         Keyboard.dismiss()
         reset("")
-        // setBalanceData([])
+        setSuccessModal(true);
     };
 
     useEffect(() => {
@@ -123,6 +124,7 @@ const AddMoney = () => {
                     name="title"
                     defaultValue=""
                 />
+                <SuccessModal />
                 <TouchableOpacity style={styles.addMoneyButton} onPress={handleSubmit(onSubmit)}>
                     <Text style={styles.buttonText}>Add to Balance</Text>
                 </TouchableOpacity>

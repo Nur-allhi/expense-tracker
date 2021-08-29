@@ -81,3 +81,8 @@
 
 - user can save current balance and expense.
 - those data will store in the device when ever user came back those data will be there.
+
+> Chnagelog: v-0.2.8
+
+- Expenses list can be see at the homescreen.
+- when successfully added data to the app use will be promt with a modal of success.

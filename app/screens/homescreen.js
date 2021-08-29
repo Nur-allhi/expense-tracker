@@ -1,21 +1,20 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useContext, useEffect } from 'react';
-import { Image, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, Image, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { UserContext } from './../Context/userContext';
+import ExpenseTable from './expenseTable';
 
 function Homescreen({ navigation }) {
     const { setTotalBalance, totalbalance,
         setBalanceData, balanceData,
         setTotalExpense, totalExpense,
         setExpenseData, expenseData } = useContext(UserContext)
-
     useEffect(() => {
         getTotalBalanceFromDevice();
         getTotalExpenseFromDevice();
         getBalanceDataFromTheDevice();
         getExpenseDataFromTheDevice();
     }, [])
-
     const getTotalBalanceFromDevice = async () => {
         try {
             const balance = await AsyncStorage.getItem("TotalBalance")
@@ -26,7 +25,6 @@ function Homescreen({ navigation }) {
             console.log(error)
         }
     }
-
     const getBalanceDataFromTheDevice = async () => {
         try {
             const balanceData = await AsyncStorage.getItem("BalanceData");
@@ -37,8 +35,6 @@ function Homescreen({ navigation }) {
             console.log(error)
         }
     }
-
-    // GEtting the total expense:
     const getTotalExpenseFromDevice = async () => {
         try {
             const expense = await AsyncStorage.getItem("TotalExpense")
@@ -49,8 +45,6 @@ function Homescreen({ navigation }) {
             console.log(error)
         }
     }
-
-    // Getting expense data
     const getExpenseDataFromTheDevice = async () => {
         try {
             const expenseData = await AsyncStorage.getItem("ExpenseData");
@@ -62,8 +56,12 @@ function Homescreen({ navigation }) {
         }
     }
 
-    console.log("BalanceData =", balanceData)
-    console.log("ExpenseData =", expenseData)
+    // const clearAllData = () => {
+    //     setTotalBalance('');
+    //     setBalanceData([]);
+    //     setTotalExpense('');
+    //     setExpenseData([]);
+    // }
 
     return (
         <View style={styles.container}>
@@ -72,12 +70,12 @@ function Homescreen({ navigation }) {
                 backgroundColor="#E1E5EA"
                 translucent={true}
             />
-            <View style={styles.userSectionWrapper}>
+            <TouchableOpacity style={styles.userSectionWrapper}>
                 <Image style={styles.userImage} source={require('../assets/external/user.png')} />
                 <Text style={styles.userName}>
-                    Hi, Eftynur
+                    Hi, User
                 </Text>
-            </View>
+            </TouchableOpacity>
             <View style={styles.currentStatusWrapper}>
                 <TouchableOpacity style={styles.balance}
                     onPress={() => navigation.push('AddBalance')}>
@@ -91,17 +89,41 @@ function Homescreen({ navigation }) {
                 </TouchableOpacity>
             </View>
 
+            {/* <TouchableOpacity style={{ alignItems: "center", marginTop: 10, }} onPress={() => clearAllData()}>
+                <Text>Clear previous Data</Text>
+            </TouchableOpacity> */}
 
-            {/* <View style={styles.btnContainer}>
+            <View style={styles.expenseList}>
+                <Text style={styles.expenseListHeader}>
+                    Your Expenses Are
+                </Text>
+                <FlatList
+                    contentContainerStyle={{ padding: 10 }}
+                    showsVerticalScrollIndicator={false}
+                    data={expenseData}
+                    keyExtractor={(item, index) => index.toString()}
+                    renderItem={({ item }) =>
+                        <ExpenseTable
+                            catagory={item.expenseCatagory}
+                            amount={item.expenseAmount}
+                            time={item.time}
+                            note={item.expenseNote}
+                        />
+                    }
+                />
+            </View>
+
+
+            <View style={styles.btnContainer}>
                 <TouchableOpacity style={styles.AddBalanceBtn}
                     onPress={() => navigation.push('AddBalance')}>
-                    <Text>Add Balance</Text>
+                    <Text style={styles.btnText}>Add Balance</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.AddExpenseeBtn}
                     onPress={() => navigation.push('AddExpense')} >
-                    <Text>Add Expense</Text>
+                    <Text style={styles.btnText}>Add Expense</Text>
                 </TouchableOpacity>
-            </View> */}
+            </View>
 
 
         </View>
@@ -174,12 +196,46 @@ const styles = StyleSheet.create({
         color: "#fff",
     },
     btnContainer: {
-        marginTop: 30,
+        position: "absolute",
         flexDirection: 'row',
+        width: "80%",
+        bottom: 30,
         justifyContent: "space-around",
+        alignSelf: "center",
+
     },
-    AddBalanceBtn: {},
-    AddExpenseeBtn: {},
+    AddBalanceBtn: {
+        backgroundColor: "#4B6587",
+        height: 50,
+        width: 120,
+        alignItems: "center",
+        justifyContent: "center",
+        borderRadius: 10,
+    },
+    AddExpenseeBtn: {
+        backgroundColor: "#911F27",
+        height: 50,
+        width: 120,
+        alignItems: "center",
+        justifyContent: "center",
+        borderRadius: 10,
+    },
+    btnText: {
+        color: "#F3F0D7"
+    },
+    expenseList: {
+        backgroundColor: "#F3F1F5",
+        marginTop: 30,
+        height: "60%",
+        padding: 10,
+        borderRadius: 10,
+        elevation: 10,
+
+    },
+    expenseListHeader: {
+        fontSize: 20,
+        textAlign: "center"
+    },
 })
 
 export default Homescreen;

@@ -3,10 +3,11 @@ import React, { useContext, useEffect } from 'react';
 import { Controller, useForm } from "react-hook-form";
 import { Image, Keyboard, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { UserContext } from './../Context/userContext';
+import SuccessModal from './successModal';
 
 const AddEpenses = () => {
-    const { totalExpense, setTotalExpense, expenseData, setExpenseData } = useContext(UserContext)
-    
+    const { totalExpense, setTotalExpense, expenseData, setExpenseData, successModal, setSuccessModal } = useContext(UserContext)
+
     const { control, handleSubmit, reset } = useForm();
 
 
@@ -18,21 +19,33 @@ const AddEpenses = () => {
         saveTotalExpenseToDevice(totalExpense);
     }, [totalExpense])
 
-    
+    function formatAMPM(date) {
+        let hours = date.getHours();
+        let minutes = date.getMinutes();
+        const ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        const strTime = hours + ':' + minutes + ' ' + ampm;
+        return strTime;
+    }
+
     const onSubmit = (data) => {
-        const { formExpense, expenseCatagory, expenseNote } = data
+        const { expenseAmount, expenseCatagory, expenseNote } = data
 
         const newExpenseEntry = {
+            time: formatAMPM(new Date),
+            date: new Date(),
             id: Math.random(),
-            formExpense: parseFloat(formExpense),
+            expenseAmount: parseFloat(expenseAmount),
             expenseCatagory: expenseCatagory,
             expenseNote: expenseNote
+
         }
-        console.log("ExpenseEntry =", newExpenseEntry)
         setExpenseData([...expenseData, newExpenseEntry])
         Keyboard.dismiss()
-        // setExpenseData([]);
         reset()
+        setSuccessModal(true);
     };
 
     const saveExpenseDataToThedevice = async (expenseData) => {
@@ -49,7 +62,7 @@ const AddEpenses = () => {
 
     useEffect(() => {
         const arrayTotalExpense = expenseData.reduce((acc, formEntry) => {
-            return acc + formEntry.formExpense;
+            return acc + formEntry.expenseAmount;
         }, 0)
         setTotalExpense(arrayTotalExpense)
     }, [expenseData])
@@ -104,7 +117,7 @@ const AddEpenses = () => {
                             />
                         </View>
                     )}
-                    name="formExpense"
+                    name="expenseAmount"
                     defaultValue=""
                 />
                 {/* Catagory */}
@@ -153,6 +166,7 @@ const AddEpenses = () => {
                     name="expenseNote"
                     defaultValue=""
                 />
+                <SuccessModal />
                 <TouchableOpacity style={styles.submitButton} onPress={handleSubmit(onSubmit)}>
                     <Text style={styles.buttonText}>Add To Expense</Text>
                 </TouchableOpacity>

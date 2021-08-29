@@ -5,16 +5,16 @@ import AddMoney from './../screens/addMoney';
 import Homescreen from './../screens/homescreen';
 
 
-const StackNavigation = createStackNavigator();
+const stack = createStackNavigator();
 
 function StackNavigations() {
 
     return (
-        <StackNavigation.Navigator headerMode="none">
-            <StackNavigation.Screen name="Home" component={Homescreen} />
-            <StackNavigation.Screen name="AddBalance" component={AddMoney} />
-            <StackNavigation.Screen name="AddExpense" component={AddEpenses} />
-        </StackNavigation.Navigator>
+        <stack.Navigator headerMode="none">
+            <stack.Screen name="Home" component={Homescreen} />
+            <stack.Screen name="AddBalance" component={AddMoney} />
+            <stack.Screen name="AddExpense" component={AddEpenses} />
+        </stack.Navigator>
     )
 }
 
