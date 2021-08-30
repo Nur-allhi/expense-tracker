@@ -86,3 +86,8 @@
 
 - Expenses list can be see at the homescreen.
 - when successfully added data to the app use will be promt with a modal of success.
+
+> Chnagelog: v-0.2.9
+
+- Drawer Navigation added.
+- color refactor in to new file.

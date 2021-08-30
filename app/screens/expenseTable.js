@@ -1,13 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { UserContext } from './../Context/userContext';
 
 export default function ExpenseTable({ catagory, amount, time, note }) {
-    const { expenseData } = useContext(UserContext);
-    console.log(expenseData)
-
-
-
     return (
         <View>
             <View style={styles.wrapper}>

@@ -1,8 +1,11 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useContext, useEffect } from 'react';
 import { FlatList, Image, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import color from "../config/color";
 import { UserContext } from './../Context/userContext';
 import ExpenseTable from './expenseTable';
+
+
 
 function Homescreen({ navigation }) {
     const { setTotalBalance, totalbalance,
@@ -135,7 +138,7 @@ const styles = StyleSheet.create({
         flex: 1,
         marginTop: StatusBar.currentHeight,
         paddingHorizontal: 20,
-        backgroundColor: "#E1E5EA",
+        backgroundColor: color.containerBg,
 
     },
     userSectionWrapper: {
@@ -161,14 +164,14 @@ const styles = StyleSheet.create({
         width: "45%",
         height: 100,
         borderRadius: 15,
-        backgroundColor: "#64C9CF",
+        backgroundColor: color.balnceBg,
         justifyContent: "center",
         alignItems: "center"
 
     },
     balnceTitile: {
         fontSize: 16,
-        color: "#fff",
+        color: color.white,
     },
     balanceAmount: {
         fontSize: 20,
@@ -180,20 +183,20 @@ const styles = StyleSheet.create({
         width: "45%",
         height: 100,
         borderRadius: 15,
-        backgroundColor: "#588C73",
+        backgroundColor: color.spendingsBg,
         justifyContent: "center",
         alignItems: "center"
 
     },
     spendingTitle: {
         fontSize: 16,
-        color: "#fff",
+        color: color.white,
 
     },
     spendingAmount: {
         fontSize: 20,
         fontWeight: "bold",
-        color: "#fff",
+        color: color.white,
     },
     btnContainer: {
         position: "absolute",
@@ -205,7 +208,7 @@ const styles = StyleSheet.create({
 
     },
     AddBalanceBtn: {
-        backgroundColor: "#4B6587",
+        backgroundColor: color.addBalanceBtn,
         height: 50,
         width: 120,
         alignItems: "center",
@@ -213,7 +216,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
     },
     AddExpenseeBtn: {
-        backgroundColor: "#911F27",
+        backgroundColor: color.addExpensesBtn,
         height: 50,
         width: 120,
         alignItems: "center",
@@ -221,10 +224,10 @@ const styles = StyleSheet.create({
         borderRadius: 10,
     },
     btnText: {
-        color: "#F3F0D7"
+        color: color.btnTextColor,
     },
     expenseList: {
-        backgroundColor: "#F3F1F5",
+        backgroundColor: color.expenseListBg,
         marginTop: 30,
         height: "60%",
         padding: 10,

@@ -2,9 +2,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useContext, useEffect } from 'react';
 import { Controller, useForm } from "react-hook-form";
 import { Image, Keyboard, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import color from '../config/color';
 import { UserContext } from './../Context/userContext';
 import SuccessModal from './successModal';
-
 
 const AddMoney = () => {
     const { control, handleSubmit, reset } = useForm();
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
         flex: 1,
         marginTop: StatusBar.currentHeight,
         paddingHorizontal: 15,
-        backgroundColor: "#E1E5EA",
+        backgroundColor: color.conatinerBg,
 
     },
     screenTitle: {
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
         padding: 10,
         flexDirection: "row",
         alignItems: "center",
-        backgroundColor: "#fff",
+        backgroundColor: color.white,
         borderRadius: 10,
     },
     amountField: {
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
         height: "90%",
         marginTop: 10,
         paddingLeft: 20,
-        color: "#297F87",
+        color: color.amountFeildText,
         fontSize: 40,
     },
     titleWrapper: {
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         flexDirection: "row",
         alignItems: "center",
-        backgroundColor: "#fff",
+        backgroundColor: color.white,
 
     },
     titleField: {
@@ -190,10 +190,10 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         borderRadius: 10,
-        backgroundColor: "#1EAE98",
+        backgroundColor: color.addMoneyBtn,
     },
     buttonText: {
-        color: "#fff",
+        color:  color.white,
         fontSize: 16,
     },
 })
